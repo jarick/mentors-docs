@@ -17,8 +17,7 @@ paths:
     post:
       tags:
       - "Auth"
-      description: "The send sms endpoint send sms message to input phone with verification\
-        \ code"
+      description: "The send mail endpoint send mail to user with verification link"
       operationId: "authorizationSmsSendPOST"
       parameters:
       - in: "body"
@@ -40,7 +39,7 @@ paths:
     post:
       tags:
       - "Auth"
-      description: "The verificate sms code endpoint"
+      description: "The verificate mail code endpoint"
       operationId: "authorizationSmsVerifyPOST"
       parameters:
       - in: "body"
@@ -99,7 +98,9 @@ paths:
         200:
           description: "success"
           schema:
-            $ref: "#/definitions/inline_response_200"
+            type: "array"
+            items:
+              $ref: "#/definitions/Room"
         default:
           description: "error"
           schema:
@@ -186,6 +187,108 @@ paths:
           schema:
             $ref: "#/definitions/Error"
       x-swagger-router-controller: "Chat"
+  /items:
+    get:
+      tags:
+      - "Item"
+      description: "Get list of items."
+      operationId: "itemsGET"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/inline_response_200"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Item"
+    post:
+      tags:
+      - "Item"
+      description: "Create new item."
+      operationId: "itemPOST"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Item"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/Item"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Item"
+  /items/{id}:
+    put:
+      tags:
+      - "Item"
+      description: "Edit item."
+      operationId: "itemPUT"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "number"
+        format: "int32"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Item"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/Item"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Item"
+    delete:
+      tags:
+      - "Item"
+      description: "Delete item."
+      operationId: "itemDELETE"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "number"
+        format: "int32"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/Empty"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Item"
   /profile:
     get:
       tags:
@@ -232,7 +335,478 @@ paths:
           schema:
             $ref: "#/definitions/Error"
       x-swagger-router-controller: "Profile"
+  /ratings:
+    get:
+      tags:
+      - "Rating"
+      description: "Get list of ratings."
+      operationId: "raitingsGET"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/inline_response_200_1"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Rating"
+    post:
+      tags:
+      - "Rating"
+      description: "Create new rating."
+      operationId: "ratingPOST"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Rating"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/Rating"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Rating"
+  /ratings/{id}:
+    put:
+      tags:
+      - "Rating"
+      description: "Edit rating."
+      operationId: "ratingPUT"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "number"
+        format: "int32"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Rating"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/Rating"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Rating"
+    delete:
+      tags:
+      - "Rating"
+      description: "Delete rating."
+      operationId: "ratingDELETE"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "number"
+        format: "int32"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/Empty"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Rating"
+  /status:
+    get:
+      tags:
+      - "Status"
+      description: "Get list of status."
+      operationId: "statusGET"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Status"
+    post:
+      tags:
+      - "Status"
+      description: "Create new status."
+      operationId: "statusPOST"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Status"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/Status"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Status"
+  /status/{id}:
+    put:
+      tags:
+      - "Status"
+      description: "Edit status."
+      operationId: "statusPUT"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "number"
+        format: "int32"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Status"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/Status"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Status"
+    delete:
+      tags:
+      - "Status"
+      description: "Delete status."
+      operationId: "statusDELETE"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "number"
+        format: "int32"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/Empty"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Status"
+  /tags:
+    get:
+      tags:
+      - "Tag"
+      description: "Get list of tags."
+      operationId: "tagsGET"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/inline_response_200_3"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Tag"
+    post:
+      tags:
+      - "Tag"
+      description: "Create new tag."
+      operationId: "tagsPOST"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Tag"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/Tag"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Tag"
+  /tags/{id}:
+    put:
+      tags:
+      - "Tag"
+      description: "Edit tag."
+      operationId: "tagsPUT"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "number"
+        format: "int32"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Tag"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/Tag"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Tag"
+    delete:
+      tags:
+      - "Chat"
+      description: "Delete tag."
+      operationId: "tagsDELETE"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "number"
+        format: "int32"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/Empty"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Chat"
+  /tasks:
+    get:
+      tags:
+      - "Task"
+      description: "Get list of tasks."
+      operationId: "tasksGET"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/inline_response_200_4"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Task"
+    post:
+      tags:
+      - "Task"
+      description: "Create new tasks."
+      operationId: "taskPOST"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Task"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/Task"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Task"
+  /tasks/{id}:
+    put:
+      tags:
+      - "Task"
+      description: "Edit task."
+      operationId: "taskPUT"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "number"
+        format: "int32"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Task"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/Task"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Task"
+    delete:
+      tags:
+      - "Task"
+      description: "Delete task."
+      operationId: "taskDELETE"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "number"
+        format: "int32"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/Empty"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Task"
 definitions:
+  Tag:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      id:
+        type: "number"
+      name:
+        type: "string"
+      image:
+        type: "number"
+      description:
+        type: "string"
+  Rating:
+    type: "object"
+    required:
+    - "tag"
+    - "user"
+    - "value"
+    properties:
+      id:
+        type: "number"
+      user:
+        type: "number"
+      tag:
+        type: "number"
+      value:
+        type: "number"
+  Task:
+    type: "object"
+    required:
+    - "author"
+    - "name"
+    - "rating"
+    properties:
+      name:
+        type: "string"
+      description:
+        type: "string"
+      rating:
+        type: "number"
+      author:
+        type: "number"
+  Item:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      time:
+        type: "string"
+      description:
+        type: "string"
+  Status:
+    type: "object"
+    properties:
+      check:
+        type: "boolean"
+      time:
+        type: "string"
+      item:
+        type: "number"
+      user:
+        type: "number"
   MailLogin:
     type: "object"
     required:
@@ -261,10 +835,10 @@ definitions:
         type: "string"
       last_name:
         type: "string"
-      second_name:
+      company:
         type: "string"
       avatar:
-        type: "string"
+        type: "integer"
   Room:
     type: "object"
     required:
@@ -329,6 +903,38 @@ definitions:
       items:
         type: "array"
         items:
-          $ref: "#/definitions/Room"
+          $ref: "#/definitions/Item"
+      pagination:
+        $ref: "#/definitions/Pagination"
+  inline_response_200_1:
+    properties:
+      items:
+        type: "array"
+        items:
+          $ref: "#/definitions/Rating"
+      pagination:
+        $ref: "#/definitions/Pagination"
+  inline_response_200_2:
+    properties:
+      items:
+        type: "array"
+        items:
+          $ref: "#/definitions/Status"
+      pagination:
+        $ref: "#/definitions/Pagination"
+  inline_response_200_3:
+    properties:
+      items:
+        type: "array"
+        items:
+          $ref: "#/definitions/Tag"
+      pagination:
+        $ref: "#/definitions/Pagination"
+  inline_response_200_4:
+    properties:
+      items:
+        type: "array"
+        items:
+          $ref: "#/definitions/Task"
       pagination:
         $ref: "#/definitions/Pagination"

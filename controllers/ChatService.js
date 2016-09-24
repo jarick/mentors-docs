@@ -14,9 +14,9 @@ exports.chatMessagesPOST = function(args, res, next) {
     "members" : [ {
       "name" : "aeiou",
       "last_name" : "aeiou",
-      "second_name" : "aeiou",
+      "company" : "aeiou",
       "id" : "",
-      "avatar" : "aeiou"
+      "avatar" : ""
     } ],
     "name" : "aeiou",
     "active" : true,
@@ -39,26 +39,18 @@ exports.chatRoomsGET = function(args, res, next) {
   * authorization (String)
   **/
     var examples = {};
-  examples['application/json'] = {
-  "pagination" : {
-    "pageCount" : "",
-    "pageSize" : "",
-    "rowCount" : "",
-    "page" : ""
-  },
-  "items" : [ {
-    "members" : [ {
-      "name" : "aeiou",
-      "last_name" : "aeiou",
-      "second_name" : "aeiou",
-      "id" : "",
-      "avatar" : "aeiou"
-    } ],
+  examples['application/json'] = [ {
+  "members" : [ {
     "name" : "aeiou",
-    "active" : true,
-    "type" : "aeiou"
-  } ]
-};
+    "last_name" : "aeiou",
+    "company" : "aeiou",
+    "id" : "",
+    "avatar" : ""
+  } ],
+  "name" : "aeiou",
+  "active" : true,
+  "type" : "aeiou"
+} ];
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
@@ -99,9 +91,9 @@ exports.chatRoomsIdPUT = function(args, res, next) {
   "members" : [ {
     "name" : "aeiou",
     "last_name" : "aeiou",
-    "second_name" : "aeiou",
+    "company" : "aeiou",
     "id" : "",
-    "avatar" : "aeiou"
+    "avatar" : ""
   } ],
   "name" : "aeiou",
   "active" : true,
@@ -128,14 +120,32 @@ exports.chatRoomsPOST = function(args, res, next) {
   "members" : [ {
     "name" : "aeiou",
     "last_name" : "aeiou",
-    "second_name" : "aeiou",
+    "company" : "aeiou",
     "id" : "",
-    "avatar" : "aeiou"
+    "avatar" : ""
   } ],
   "name" : "aeiou",
   "active" : true,
   "type" : "aeiou"
 };
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.tagsDELETE = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * authorization (String)
+  * id (BigDecimal)
+  **/
+    var examples = {};
+  examples['application/json'] = { };
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));

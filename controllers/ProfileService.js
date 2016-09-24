@@ -9,9 +9,9 @@ exports.profileGET = function(args, res, next) {
   examples['application/json'] = {
   "name" : "aeiou",
   "last_name" : "aeiou",
-  "second_name" : "aeiou",
+  "company" : "aeiou",
   "id" : "",
-  "avatar" : "aeiou"
+  "avatar" : ""
 };
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
@@ -33,9 +33,9 @@ exports.profilePOST = function(args, res, next) {
   examples['application/json'] = {
   "name" : "aeiou",
   "last_name" : "aeiou",
-  "second_name" : "aeiou",
+  "company" : "aeiou",
   "id" : "",
-  "avatar" : "aeiou"
+  "avatar" : ""
 };
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');

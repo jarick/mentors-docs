@@ -25,3 +25,7 @@ module.exports.chatRoomsIdPUT = function chatRoomsIdPUT (req, res, next) {
 module.exports.chatRoomsPOST = function chatRoomsPOST (req, res, next) {
   Chat.chatRoomsPOST(req.swagger.params, res, next);
 };
+
+module.exports.tagsDELETE = function tagsDELETE (req, res, next) {
+  Chat.tagsDELETE(req.swagger.params, res, next);
+};
