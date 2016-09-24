@@ -1,0 +1,345 @@
+---
+swagger: "2.0"
+info:
+  description: "REST API for working with server"
+  version: "2.0.0"
+  title: "find-mentors API"
+host: "find-mentors-api.herokuapp.com"
+basePath: "/api/v2"
+schemes:
+- "http"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /authorization/sms/send:
+    post:
+      tags:
+      - "Auth"
+      description: "The send sms endpoint send sms message to input phone with verification\
+        \ code"
+      operationId: "authorizationSmsSendPOST"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/SmsLogin"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/SmsLogin"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Auth"
+  /authorization/sms/verify:
+    post:
+      tags:
+      - "Auth"
+      description: "The verificate sms code endpoint"
+      operationId: "authorizationSmsVerifyPOST"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/SmsVerify"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/SmsVerify"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Auth"
+  /chat/messages:
+    post:
+      tags:
+      - "Chat"
+      description: "Create new chats message."
+      operationId: "chatMessagesPOST"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Message"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/Message"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Chat"
+  /chat/rooms:
+    get:
+      tags:
+      - "Chat"
+      description: "Get list of chats rooms."
+      operationId: "chatRoomsGET"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/inline_response_200"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Chat"
+    post:
+      tags:
+      - "Chat"
+      description: "Create new chat."
+      operationId: "chatRoomsPOST"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Room"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/Room"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Chat"
+  /chat/rooms/{id}:
+    put:
+      tags:
+      - "Chat"
+      description: "Edit chat room."
+      operationId: "chatRoomsIdPUT"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "number"
+        format: "int32"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Room"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/Room"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Chat"
+    delete:
+      tags:
+      - "Chat"
+      description: "Delete chat room."
+      operationId: "chatRoomsIdDELETE"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "number"
+        format: "int32"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/Empty"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Chat"
+  /profile:
+    get:
+      tags:
+      - "Profile"
+      description: "Get user profile."
+      operationId: "profileGET"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/Profile"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Profile"
+    post:
+      tags:
+      - "Profile"
+      description: "Update user profile."
+      operationId: "profilePOST"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Profile"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/Profile"
+        default:
+          description: "error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Profile"
+definitions:
+  SmsLogin:
+    type: "object"
+    required:
+    - "country"
+    - "deviceId"
+    - "deviceType"
+    - "phone"
+    properties:
+      phone:
+        type: "string"
+      country:
+        type: "string"
+      name:
+        type: "string"
+      avatar:
+        type: "string"
+      pushToken:
+        type: "string"
+      deviceId:
+        type: "string"
+      deviceType:
+        type: "string"
+  SmsVerify:
+    type: "object"
+    required:
+    - "code"
+    - "id"
+    properties:
+      id:
+        $ref: "#/definitions/SmsLogin"
+      code:
+        type: "string"
+  Profile:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      last_name:
+        type: "string"
+      second_name:
+        type: "string"
+      avatar:
+        type: "string"
+  Room:
+    type: "object"
+    required:
+    - "active"
+    - "name"
+    - "type"
+    properties:
+      active:
+        type: "boolean"
+      type:
+        type: "string"
+        enum:
+        - "public"
+        - "private"
+      name:
+        type: "string"
+      members:
+        type: "array"
+        items:
+          $ref: "#/definitions/Profile"
+  Message:
+    type: "object"
+    required:
+    - "body"
+    - "room"
+    properties:
+      id:
+        type: "number"
+        format: "int32"
+      body:
+        type: "string"
+      room:
+        $ref: "#/definitions/Room"
+  Empty:
+    type: "object"
+  Error:
+    type: "object"
+    required:
+    - "code"
+    - "status"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      status:
+        type: "string"
+      message:
+        type: "string"
+  Pagination:
+    type: "object"
+    properties:
+      rowCount:
+        type: "integer"
+      pageCount:
+        type: "integer"
+      page:
+        type: "integer"
+      pageSize:
+        type: "integer"
+  inline_response_200:
+    properties:
+      items:
+        type: "array"
+        items:
+          $ref: "#/definitions/Room"
+      pagination:
+        $ref: "#/definitions/Pagination"
