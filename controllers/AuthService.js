@@ -3,17 +3,12 @@
 exports.authorizationSmsSendPOST = function(args, res, next) {
   /**
    * parameters expected in the args:
-  * body (SmsLogin)
+  * body (MailLogin)
   **/
     var examples = {};
   examples['application/json'] = {
-  "deviceType" : "aeiou",
-  "country" : "aeiou",
-  "phone" : "aeiou",
-  "name" : "aeiou",
-  "avatar" : "aeiou",
-  "pushToken" : "aeiou",
-  "deviceId" : "aeiou"
+  "mail" : "aeiou",
+  "id" : ""
 };
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
@@ -28,20 +23,12 @@ exports.authorizationSmsSendPOST = function(args, res, next) {
 exports.authorizationSmsVerifyPOST = function(args, res, next) {
   /**
    * parameters expected in the args:
-  * body (SmsVerify)
+  * body (MailVerify)
   **/
     var examples = {};
   examples['application/json'] = {
   "code" : "aeiou",
-  "id" : {
-    "deviceType" : "aeiou",
-    "country" : "aeiou",
-    "phone" : "aeiou",
-    "name" : "aeiou",
-    "avatar" : "aeiou",
-    "pushToken" : "aeiou",
-    "deviceId" : "aeiou"
-  }
+  "id" : ""
 };
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');

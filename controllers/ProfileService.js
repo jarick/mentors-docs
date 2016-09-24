@@ -10,6 +10,7 @@ exports.profileGET = function(args, res, next) {
   "name" : "aeiou",
   "last_name" : "aeiou",
   "second_name" : "aeiou",
+  "id" : "",
   "avatar" : "aeiou"
 };
   if(Object.keys(examples).length > 0) {
@@ -33,6 +34,7 @@ exports.profilePOST = function(args, res, next) {
   "name" : "aeiou",
   "last_name" : "aeiou",
   "second_name" : "aeiou",
+  "id" : "",
   "avatar" : "aeiou"
 };
   if(Object.keys(examples).length > 0) {

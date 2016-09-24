@@ -15,6 +15,7 @@ exports.chatMessagesPOST = function(args, res, next) {
       "name" : "aeiou",
       "last_name" : "aeiou",
       "second_name" : "aeiou",
+      "id" : "",
       "avatar" : "aeiou"
     } ],
     "name" : "aeiou",
@@ -50,6 +51,7 @@ exports.chatRoomsGET = function(args, res, next) {
       "name" : "aeiou",
       "last_name" : "aeiou",
       "second_name" : "aeiou",
+      "id" : "",
       "avatar" : "aeiou"
     } ],
     "name" : "aeiou",
@@ -98,6 +100,7 @@ exports.chatRoomsIdPUT = function(args, res, next) {
     "name" : "aeiou",
     "last_name" : "aeiou",
     "second_name" : "aeiou",
+    "id" : "",
     "avatar" : "aeiou"
   } ],
   "name" : "aeiou",
@@ -126,6 +129,7 @@ exports.chatRoomsPOST = function(args, res, next) {
     "name" : "aeiou",
     "last_name" : "aeiou",
     "second_name" : "aeiou",
+    "id" : "",
     "avatar" : "aeiou"
   } ],
   "name" : "aeiou",

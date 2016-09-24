@@ -13,7 +13,7 @@ consumes:
 produces:
 - "application/json"
 paths:
-  /authorization/sms/send:
+  /authorization/mail/send:
     post:
       tags:
       - "Auth"
@@ -25,18 +25,18 @@ paths:
         name: "body"
         required: true
         schema:
-          $ref: "#/definitions/SmsLogin"
+          $ref: "#/definitions/MailLogin"
       responses:
         200:
           description: "success"
           schema:
-            $ref: "#/definitions/SmsLogin"
+            $ref: "#/definitions/MailLogin"
         default:
           description: "error"
           schema:
             $ref: "#/definitions/Error"
       x-swagger-router-controller: "Auth"
-  /authorization/sms/verify:
+  /authorization/mail/verify:
     post:
       tags:
       - "Auth"
@@ -47,12 +47,12 @@ paths:
         name: "body"
         required: true
         schema:
-          $ref: "#/definitions/SmsVerify"
+          $ref: "#/definitions/MailVerify"
       responses:
         200:
           description: "success"
           schema:
-            $ref: "#/definitions/SmsVerify"
+            $ref: "#/definitions/MailVerify"
         default:
           description: "error"
           schema:
@@ -233,41 +233,30 @@ paths:
             $ref: "#/definitions/Error"
       x-swagger-router-controller: "Profile"
 definitions:
-  SmsLogin:
+  MailLogin:
     type: "object"
     required:
-    - "country"
-    - "deviceId"
-    - "deviceType"
-    - "phone"
+    - "mail"
     properties:
-      phone:
+      id:
+        type: "integer"
+      mail:
         type: "string"
-      country:
-        type: "string"
-      name:
-        type: "string"
-      avatar:
-        type: "string"
-      pushToken:
-        type: "string"
-      deviceId:
-        type: "string"
-      deviceType:
-        type: "string"
-  SmsVerify:
+  MailVerify:
     type: "object"
     required:
     - "code"
     - "id"
     properties:
       id:
-        $ref: "#/definitions/SmsLogin"
+        type: "integer"
       code:
         type: "string"
   Profile:
     type: "object"
     properties:
+      id:
+        type: "integer"
       name:
         type: "string"
       last_name:
