@@ -1,8 +1,9 @@
 'use strict';
 
-exports.statusDELETE = function(args, res, next) {
+exports.competentsDELETE = function(args, res, next) {
   /**
    * parameters expected in the args:
+  * authorization (String)
   * id (BigDecimal)
   **/
     var examples = {};
@@ -17,7 +18,7 @@ exports.statusDELETE = function(args, res, next) {
   
 }
 
-exports.statusGET = function(args, res, next) {
+exports.competentsGET = function(args, res, next) {
   /**
    * parameters expected in the args:
   **/
@@ -30,10 +31,10 @@ exports.statusGET = function(args, res, next) {
     "page" : ""
   },
   "items" : [ {
-    "item" : 1.3579000000000001069366817318950779736042022705078125,
-    "check" : true,
-    "time" : "aeiou",
-    "user" : 1.3579000000000001069366817318950779736042022705078125
+    "image" : 1.3579000000000001069366817318950779736042022705078125,
+    "name" : "aeiou",
+    "description" : "aeiou",
+    "id" : 1.3579000000000001069366817318950779736042022705078125
   } ]
 };
   if(Object.keys(examples).length > 0) {
@@ -46,40 +47,18 @@ exports.statusGET = function(args, res, next) {
   
 }
 
-exports.statusPOST = function(args, res, next) {
+exports.competentsPOST = function(args, res, next) {
   /**
    * parameters expected in the args:
-  * body (Status)
+  * authorization (String)
+  * body (Competent)
   **/
     var examples = {};
   examples['application/json'] = {
-  "item" : 1.3579000000000001069366817318950779736042022705078125,
-  "check" : true,
-  "time" : "aeiou",
-  "user" : 1.3579000000000001069366817318950779736042022705078125
-};
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.statusPUT = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (BigDecimal)
-  * body (Status)
-  **/
-    var examples = {};
-  examples['application/json'] = {
-  "item" : 1.3579000000000001069366817318950779736042022705078125,
-  "check" : true,
-  "time" : "aeiou",
-  "user" : 1.3579000000000001069366817318950779736042022705078125
+  "image" : 1.3579000000000001069366817318950779736042022705078125,
+  "name" : "aeiou",
+  "description" : "aeiou",
+  "id" : 1.3579000000000001069366817318950779736042022705078125
 };
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
